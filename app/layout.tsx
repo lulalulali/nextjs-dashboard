@@ -7,6 +7,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+    //  analytics('prj_gEWk9eqBuUwWvAfv2No0u7dTwv5g');
   return (
     <html lang="en">
        <body className={`${inter.className} antialiased`}>{children}

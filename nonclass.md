@@ -163,3 +163,44 @@ UI 设计是一个复杂的过程，涉及到用户需求分析、信息架构�
 7. **图形设计师：** 负责创建高质量的图像和图形，但他们的工作也可能涉及到选择适当的图像格式和优化图像以适应不同的用途。
 
 这些职位可能有重叠，特别是在小型团队或创业公司中。在大型组织中，专门负责图像优化的职位可能会更为明确。图像优化通常涉及技术和设计方面的知识，因此跨职能团队的协作是非常重要的。
+
+## ORM和SQL
+
+ORM（Object-Relational Mapping）是一种编程技术，它允许开发者在应用程序中使用面向对象的方式来操作数据库，而不必直接编写 SQL 查询语句。ORM 将数据库表映射为对象，开发者可以通过编写代码来操作这些对象，而不用关心底层的数据库细节。
+
+比方说，假设你有一个简单的学生信息管理系统，其中有一个学生表格，包含学生的姓名、年龄、学号等信息。使用 ORM 的话，你可以定义一个学生对象（类），并且通过这个对象的实例来进行数据库的操作，而不必编写 SQL 语句。
+
+示例（使用 Python 的 SQLAlchemy ORM）：
+
+```python
+# 定义学生对象
+class Student(Base):
+    __tablename__ = 'students'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    age = Column(Integer)
+    student_id = Column(String, unique=True)
+
+# 插入新学生
+new_student = Student(name='John Doe', age=20, student_id='12345')
+session.add(new_student)
+session.commit()
+
+# 查询所有学生
+all_students = session.query(Student).all()
+
+# 根据条件查询学生
+specific_students = session.query(Student).filter_by(age=20).all()
+```
+
+在这个例子中，`Student` 对象被映射到数据库中的 `students` 表格，ORM 负责将对象操作翻译成相应的 SQL 查询，开发者只需要使用面向对象的方式进行数据操作。
+
+而 SQL（Structured Query Language）是一种用于管理和操作关系型数据库的标准化查询语言。它使用类似于自然语言的语法，用于执行各种数据库操作，包括查询、插入、更新和删除数据等。
+
+比方说，如果我们要查询所有年龄为 20 岁的学生，对应的 SQL 查询语句可能是：
+
+```sql
+SELECT * FROM students WHERE age = 20;
+```
+
+这个查询语句会从数据库中的 `students` 表格中选择所有年龄为 20 岁的学生记录。ORM 的目的之一就是让开发者不必直接编写这样的 SQL 查询语句，而是通过编写代码来实现相同的功能。
