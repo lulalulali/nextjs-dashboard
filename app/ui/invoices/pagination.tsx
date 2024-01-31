@@ -4,11 +4,25 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { generatePagination } from '@/app/lib/utils';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
   // NOTE: comment in this code when you get to this point in the course
 
   // const allPages = generatePagination(currentPage, totalPages);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get('page')) || 1;
+
+  const createPageURL = (pageNumber: number | string) => {
+    // 创建一个新的 URLSearchParams 对象，使用当前页面的查询参数
+    const params = new URLSearchParams(searchParams);
+      // 设置 'page' 参数为传入的页码，并将其转换为字符串
+    params.set('page', pageNumber.toString());
+      // 使用新的查询参数构建新的 URL，并返回
+    return `${pathname}?${params.toString()}`;
+  };
+  
 
   return (
     <>

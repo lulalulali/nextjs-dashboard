@@ -2,12 +2,17 @@ import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
-import { LatestInvoice } from '@/app/lib/definitions';
-export default async function LatestInvoices({
-  latestInvoices,
-}: {
-  latestInvoices: LatestInvoice[];
-}) {
+import { fetchLatestInvoices } from '@/app/lib/data';
+
+// import { LatestInvoice } from '@/app/lib/definitions'; 跟下面的prop一起删掉
+export default async function LatestInvoices(
+//   {
+//   latestInvoices,
+// }: {
+//   latestInvoices: LatestInvoice[];
+// }
+) 
+{  const latestInvoices = await fetchLatestInvoices();//与悬挂配合
   return (
     <div className="flex w-full flex-col md:col-span-4">
       <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
