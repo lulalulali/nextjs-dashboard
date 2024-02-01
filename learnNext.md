@@ -49,9 +49,25 @@ debouncng：是为了不要键入中实时不停的去search数据
 
 服务器操作："Server Actions" 就是后台管理员执行的一系列操作，以响应前台收银员和顾客的需求，确保购物过程正常进行。用form元素来invoke这个操作
 revalidatePath and revalidateTag.用来验证相关缓存  功效：allows users to interact with the form and submit data even if the JavaScript for the form hasn't been loaded yet or if it fails to load.
-创建发票的过程：创建一个表单来抓数据  这里是发票表单
-从表单中唤醒创建的sa 在lib中actionsTs中'use server';创一个异步叫ci接收formdata ci向action传
-在sa中从formdata中提数据  actionts
-验证并准备插入数据 类型验证导入zod对象和强制更改 以美分存储amount乘以100 创建新日期
-插入数据并处理错误 import sql 然后取发票中的值传入变量 
-重新验证并向用户带回应该的界面
+
+创建发票的过程：1创建一个表单来抓数据  这里是发票表单
+2从表单中唤醒创建的sa 在lib中actionsTs中'use server';创一个异步叫ci接收formdata ci向action传
+3在sa中从formdata中提数据  actionts
+4验证并准备插入数据 类型验证导入zod对象和强制更改 以美分存储amount乘以100 创建新日期
+5插入数据并处理错误 import sql 然后取发票中的值传入变量
+6重新验证并向用户带回应该的界面 去缓存重新生成和重新导航一个有新篇的地址 这两功能都是先import 再用
+
+更新发票：
+在ui的Table中弄一个UpdateInvoice接收发票    在UpdateInvoice组件搞一个链接到动态路由段
+造一个page 从params上读id
+fetch：
+id给sa
+即
+从 formData 中提数据
+用 Zod（一个 TypeScript 友好的数据验证库）定义一个发票数据模型，确保符合预期的类型结构，如发票号码为字符串，金额为数字等.确保数据的一致性和完整性。
+将金额转换为美分 可以编写一个函数
+将变量传递给 SQL 查询：将经过验证和转换的数据插入数据库。涉及使用一个 SQL 查询字符串，其中包含占位符，后将验证后的数据作为变量传递给查询
+调用 revalidatePath 以清除客户端缓存并发出新的服务器请求：清除客户端缓存并在下一次用户请求时重新生成页面。确保在浏览发票列表时获得最新的数据。
+调用 redirect 以将用户重定向到发票页面：成功插入新票后，将用户重定向到新生成的发票页面，以便查看和确认新建。
+
+总之，上述步骤描述了从前端表单收集数据，验证和处理数据，然后将数据传递到后端进行数据库操作，并在必要时刷新客户端缓存和导航用户的一系列操作。这是一个通用的工作流程，具体的实现方式可能因应用的需求而有所不同。
