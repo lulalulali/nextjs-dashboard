@@ -241,3 +241,114 @@ console.log(result); // 输出：45.14
 
 总之，字符串用于表示文本信息，而数字用于表示数值和执行数学运算。这两种数据类型在计算机编程中广泛应用。
 所谓字符串要引号引起来，数字就不用。所以字符串拼接也要用引号再加号  而数字不用直接加减
+
+## prop
+
+在编程中，"prop" 通常是 "property" 的缩写。在软件开发中，"prop" 通常指代对象的属性（property），这些属性描述了对象的特征、状态或配置。这个概念在许多编程语言和框架中都很常见，特别是在前端框架（如React、Vue）中。
+
+在 React 中，"prop" 是组件之间通信的一种机制。每个 React 组件可以接受一些属性（props），这些属性是由父组件传递给子组件的。通过使用 props，你可以在组件之间传递数据，以便动态地渲染不同的内容。
+
+例如，在以下的 React 组件中，`name` 就是一个 prop：
+
+```jsx
+function Greeting(props) {
+  return <p>Hello, {props.name}!</p>;
+}
+
+// 使用 Greeting 组件，并传递 name 属性
+const App = () => {
+  return <Greeting name="Alice" />;
+};
+```
+
+在这个例子中，`name` 是 `Greeting` 组件的一个属性（prop），它被设置为字符串 "Alice"。`Greeting` 组件使用这个属性来动态显示不同的问候语。
+
+总的来说，"prop" 是一种在组件之间传递数据的机制，使得组件能够根据外部传入的属性值来动态渲染内容。
+
+## ;和,的使用
+
+在编程中，分号 `;` 和逗号 `,` 有不同的用途，它们在语法中扮演不同的角色。
+
+1. **分号 `;`：**
+   - 用途：在许多编程语言中，分号 `;` 用于表示语句的结束。在大多数语言中，每个语句必须以分号结束。例如，JavaScript、C、Java 等语言中都使用分号来标志语句的结束。
+   - 示例：
+
+     ```javascript
+     let x = 5;
+     let y = 10;
+     console.log(x + y);
+     ```
+
+2. **逗号 `,`：**
+   - 用途：逗号用于分隔元素、参数或语句。在一些语法中，逗号可以用于定义多个变量、数组元素、函数参数等。在一些语言中，逗号也可以用于在一行中写多个语句。
+   - 示例：
+
+     ```javascript
+     // 定义多个变量
+     let a = 1, b = 2, c = 3;
+
+     // 在数组中使用逗号分隔元素
+     let numbers = [1, 2, 3, 4, 5];
+
+     // 在函数参数中使用逗号
+     function add(x, y) {
+       return x + y;
+     }
+     ```
+
+在具体的语法规则中，分号和逗号的使用取决于编程语言的要求。例如，在 JavaScript 中，语句末尾通常使用分号，而逗号通常用于分隔数组元素、函数参数等。在其他语言中，可能有不同的约定。
+
+总体来说，使用分号表示语句的结束，使用逗号用于分隔多个元素或参数。在具体编码时，要根据所使用的编程语言的语法规则来选择正确的符号。
+
+## form>
+
+`<form>` 标签是 HTML 中用来创建表单的元素。在 HTML 中，表单用于收集用户输入的信息，通常包含各种输入字段（如文本框、下拉框、单选框等），以及提交按钮。
+
+基本的 `<form>` 结构如下：
+
+```html
+<form action="/submit" method="post">
+  <!-- 表单中的输入字段和其他元素 -->
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username">
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password">
+
+  <button type="submit">Submit</button>
+</form>
+```
+
+- `action` 属性定义了表单提交的目标 URL。当用户点击提交按钮时，表单将向该 URL 发送请求。
+- `method` 属性定义了发送请求的 HTTP 方法，通常是 "get" 或 "post"。
+
+在 React 或其他前端框架中，你可以使用 JSX 语法创建类似的表单结构。例如，在 React 中，一个简单的表单组件可能如下所示：
+
+```jsx
+import React from 'react';
+
+function MyForm() {
+  const handleSubmit = (event) => {
+    // 处理表单提交逻辑
+    event.preventDefault();
+    // 其他处理...
+  };
+
+  return (
+    <form action="/submit" method="post" onSubmit={handleSubmit}>
+      {/* 表单中的输入字段和其他元素 */}
+      <label htmlFor="username">Username:</label>
+      <input type="text" id="username" name="username" />
+
+      <label htmlFor="password">Password:</label>
+      <input type="password" id="password" name="password" />
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default MyForm;
+```
+
+在这个例子中，`<form>` 元素通过 `onSubmit` 属性绑定了一个处理函数，该函数在表单提交时被调用。这个函数通常包含了处理表单数据、发送请求等逻辑。

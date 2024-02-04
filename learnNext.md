@@ -57,7 +57,7 @@ revalidatePath and revalidateTag.用来验证相关缓存  功效：allows users
 5插入数据并处理错误 import sql 然后取发票中的值传入变量
 6重新验证并向用户带回应该的界面 去缓存重新生成和重新导航一个有新篇的地址 这两功能都是先import 再用
 
-更新发票：
+更新发票（跟创一个发票差不多）：
 在ui的Table中弄一个UpdateInvoice接收发票    在UpdateInvoice组件搞一个链接到动态路由段
 造一个page 从params上读id
 fetch：
@@ -67,7 +67,42 @@ id给sa
 用 Zod（一个 TypeScript 友好的数据验证库）定义一个发票数据模型，确保符合预期的类型结构，如发票号码为字符串，金额为数字等.确保数据的一致性和完整性。
 将金额转换为美分 可以编写一个函数
 将变量传递给 SQL 查询：将经过验证和转换的数据插入数据库。涉及使用一个 SQL 查询字符串，其中包含占位符，后将验证后的数据作为变量传递给查询
-调用 revalidatePath 以清除客户端缓存并发出新的服务器请求：清除客户端缓存并在下一次用户请求时重新生成页面。确保在浏览发票列表时获得最新的数据。
-调用 redirect 以将用户重定向到发票页面：成功插入新票后，将用户重定向到新生成的发票页面，以便查看和确认新建。
-
+调用 re validatePath 以清除客户端缓存并发出新的服务器请求：清除客户端缓存并在下一次用户请求时重新生成页面。确保在浏览发票列表时获得最新的数据。
+调用 re direct 以将用户重定向到发票页面：成功插入新票后，将用户重定向到新生成的发票页面，以便查看和确认新建。
 总之，上述步骤描述了从前端表单收集数据，验证和处理数据，然后将数据传递到后端进行数据库操作，并在必要时刷新客户端缓存和导航用户的一系列操作。这是一个通用的工作流程，具体的实现方式可能因应用的需求而有所不同。
+
+删除发票：
+创一个deleteinovoice在actions中 记得加一个revalidatepath 但注意不用redirect了 因为就在本页
+搞一个删除按钮 是一个包 装在ui的button中
+
+## 处理错误
+
+在sa中添加try/catch   actionsts中 try { } catch (error) {return { };
+方法一：errortsx界面怎么写 首先use client 然后一个是error属性prop 一个是try again的button  
+方法二：notFound函数来处理404error
+notFound先于error，便于表达更加具体的错误。  error多用来给用户回退（先抓捕错误）
+
+## improve access
+
+用eslint检查
+三件事改进：semantic html、label、focus outline
+客户端表单检查和服务器端表单检查
+添加aria标签 这是一个对视障人士友好的功能  Accessible Rich Internet Applications
+
+## Authentication和Authorization
+
+造登录的路径 loginPage在login文件夹里
+用NextAuth.js来authen：setup authorjs
+添加authorcofig
+config中检查语句（authconfig中）
+中间件保护路由
+authts来密码哈希
+import Credential并填充 然后建一个从数据库查用户的函数 调用bcrypt看密码一致吗 一致则返回用户 不一致则返回null
+更新login form使其和auth logic链接 ：在actions中authenticate函数 在loginform中处理error用useformstate来处理表单挂起
+添加登出功能：/ui/dashboard/sidenav.tsx中添加signout函数
+
+## 添加matadata
+
+元数据是用来seo的 服务搜索引擎 面向被搜索编程
+网站图标和open graph
+页面标题和说明
