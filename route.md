@@ -1,5 +1,37 @@
 # route
 
+## 基本知识
+
+路由是每个app的框架
+术语：tree  subtree root leaf
+url segment和url path（domain后的 包含segments）
+默认下，app文件夹里面组件是react的服务器组件
+文件夹用来定义路由，文件夹中的文件用来创造ui
+嵌套路由就是建子文件夹
+嵌套路由中的文件习惯：
+        layout区段及其子级的共享 UI
+        page路由的唯一 UI，并使路由可公开访问
+       loading加载区段及其子项的 UI
+      not-found未找到区段及其子项的 UI
+      error区段及其子项的错误 UI
+      global-error全局错误 UI
+      route服务器端 API 端点
+      template专门的重新渲染的布局 UI
+      default并行路由的回退 UI
+装react组件的js文件也是嵌套的：
+     layout.js
+     template.js
+     error.js (React error boundary)
+     loading.js (React suspense boundary)
+     not-found.js (React error boundary)
+     page.js or nested layout.js
+自己起名、造的js不能routable
+根布局rootlayout：只有根布局包含html和body标记
+
+## 页面和布局
+
+模板template：为每个子级创建实例instance 适用于：useeffct和usestate记录页面浏览量和页面反馈表  ？ 更改默认框架行为  如Suspense Boundaries  对于回退，显示在每个导航上。
+
 ## 嵌套路由
 
 好的，让我们通过一个生活中的故事来理解什么是嵌套路由。
