@@ -1,5 +1,38 @@
 # 自己的一点总结
 
+## next
+
+啥是nextjs 用来建全栈的react框架（即用它的组件来构建页面）
+可以使developer少一些做配置 多做程序本身 个人弄和大团队合作都适用
+特点：路由 抓数 渲染（静动） 造型 优化 ts
+两路由：app路由和page路由 app路新一点可用react的服务器组件和streaming功能
+必备知识：对html css react有基本的了解
+layout里面有个html>和body> 要是你忘创建了 服务器会自动dev一个layout
+public里面藏静态资产：图片 字体等
+顶级文件夹：app pages public src
+顶级文件：next.config.js Next配置
+         package.json 项目依赖项和脚本
+         instrumentation.ts  OpenTelemetry and Instrumentation 文件
+        middleware.ts下一页请求中间件
+        .env 环境变量
+        .env.local局部环境变量
+        .env.production生产环境变量
+        .env.development开发环境变量
+        .eslintrc.json ESLint 配置
+        .gitignore要忽略的 Git 文件和文件夹
+        next-env.d.ts TypeScript 声明文件
+        tsconfig.jsonTS配置文件
+        jsconfig.jsonjs配置文件
+app路由文件起名习惯：  
+        特殊文件：-app -document -error 404 500
+        路由：1夹：index folder 2：index file
+        动态路由：文件夹习惯[folder]/index动态路由段
+                 [...folder]/index Catch-all 路由段
+                 [[...folder]]/index可选的全能路线段
+        文件习惯[file]动态路由段
+               [...file]Catch-all 路由段
+               [[...file]]可选的全能路线段
+
 ## 各个文件夹一般放什么东西
 
 app中放route components和逻辑
@@ -105,4 +138,4 @@ import Credential并填充 然后建一个从数据库查用户的函数 调用b
 
 元数据是用来seo的 服务搜索引擎 面向被搜索编程
 网站图标和open graph
-页面标题和说明
+页面标题和说明  只有内1层可以继承 外面的主标题

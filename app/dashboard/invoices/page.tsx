@@ -7,11 +7,11 @@ import { Suspense } from 'react';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { fetchInvoicesPages } from '@/app/lib/data';
 
-import { Metadata } from 'next';
+ import { Metadata } from 'next';
  
-export const metadata: Metadata = {
-  title: 'Invoices自主加 ',
-};
+ export const metadata: Metadata = {
+  title: '发票页',
+ }
  
 // export default async function Page() { 
 export default async function Page({
